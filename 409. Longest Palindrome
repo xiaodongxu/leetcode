@@ -1,0 +1,64 @@
+import java.util.*;
+
+public class Solution {
+    public int longestPalindrome(String s) {
+        
+        Hashtable<Character,Integer> hashtable = new Hashtable<>();
+        //HashMap<Character,Integer> hashtable = new HashMap<>();
+        //for(int i=0;i<s.length();++i)
+        for(char c: s.toCharArray())
+        {
+            //char c = s.charAt(i);
+            // if(hashtable.containsKey(c) )
+            // {
+                hashtable.put(c, hashtable.getOrDefault(c, 0) + 1);
+                // int num = hashtable.get(c);
+                // hashtable.remove(c);
+                // hashtable.put(c,num+1);         //stupid here, gotta remove the element first and put it into the hashtable again
+           // }
+            // else
+            // {
+            //     hashtable.put(c,1);
+            // }
+        }
+        int result = 0;
+        boolean hasOddFrequency = false;
+        
+        for(char key:hashtable.keySet())  //wonderful usage of foreach and keySet() method !!!
+        {
+            int i = hashtable.get(key);
+            if( i%2 == 0)
+                result += i;
+            else
+            {
+                hasOddFrequency = true;
+                result = result+i-1;
+            }
+        }
+       // int i = hasOddFrequency?1:0;
+        
+      //  System.out.println(hasOddFrequency ? 1:0);
+        return result + (hasOddFrequency?1:0 ) ;
+        
+        // if (s == null || s.length() == 0) return 0;
+        // Map<Character, Integer> map = new HashMap<>();
+        // int maxOddLength = Integer.MIN_VALUE;
+        // for (char c : s.toCharArray()) {      //using String.toCharArray() method but not for(i=0;;) loop and String.charAt(i)
+        //     map.put(c, map.getOrDefault(c, 0) + 1);
+        // }
+        // int result = 0;
+        // boolean hasOddFrequency = false;
+        // for (char c : map.keySet()) {
+        //     int freq = map.get(c);
+        //     if (freq % 2 == 0) {
+        //         result += freq;
+        //     } else {
+        //         hasOddFrequency = true;
+        //         result += freq - 1;
+        //     }
+        // }
+        // // We can only allow one character that exists odd number of times within
+        // // a panlindrome
+        // return result + (hasOddFrequency ? 1 : 0);
+    }
+}
